@@ -49,6 +49,17 @@ exports.all = async (ctx,next) => {
         page:params.page,
       }
     })
+  }else if (params.api == "search") {
+    res = await Axios.get('http://openapi.qingtaoke.com/search', {
+      params: {
+        s_type:'1',
+        v:'1.0',
+        app_key: 'LT9hObZ3',
+        page:params.page,
+        sort:params.sort,
+        key_word:params.searchValue,
+      }
+    })
   }
   
   ctx.response.body = res.data
