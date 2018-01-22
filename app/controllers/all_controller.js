@@ -42,6 +42,11 @@ exports.all = async (ctx,next) => {
         v:2
       }
     })
+    for (let i = 0; i < res.data.result.length; i++) {
+      if (!res.data.result[i].Pic.startsWith("http")) {
+        res.data.result[i].Pic = "http:"+res.data.result[i].Pic;
+      }
+    }
   }else if (params.api == "top_day") {
     res = await Axios.get('http://api.taokezhushou.com/api/v1/top_day', {
       params: {
