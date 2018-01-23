@@ -69,6 +69,7 @@ var options = {
 };
 var server = http.createServer(app.callback());
 https.createServer(options, app.callback()).listen(443);
+console.log('http server is running');
 console.log('https server is running');
 /**
  * Listen on provided port, on all network interfaces.

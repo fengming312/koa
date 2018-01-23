@@ -1,4 +1,5 @@
 const Axios =require('axios');
+const config = require('../../config/url.config');
 
 exports.all = async (ctx,next) => {
   let res;
@@ -12,9 +13,9 @@ exports.all = async (ctx,next) => {
     //     }
     //   })
     if (params.cate_id == 0) {
-      res = await Axios.get('http://api.dataoke.com/index.php?r=Port/index&type=total&v=2', {
+      res = await Axios.get(config.dataoke_jingxuan, {
         params: {
-          appkey: 'z3slibyowj',
+          appkey: config.dataoke_key,
           page:params.page,
         }
       })
@@ -24,9 +25,9 @@ exports.all = async (ctx,next) => {
         }
       }
     }else {
-      res = await Axios.get('http://api.taokezhushou.com/api/v1/search', {
+      res = await Axios.get(config.taokezhushou_jingxuan, {
         params: {
-          app_key: 'dda0b3fd3879156d',
+          app_key: config.dataokezhushou_key,
           page:params.page,
           cate_id:params.cate_id,
           sort:params.sort
@@ -40,9 +41,9 @@ exports.all = async (ctx,next) => {
     //     page:params.page,
     //   }
     // })
-    res = await Axios.get('http://api.dataoke.com/index.php?r=Port/index&type=paoliang', {
+    res = await Axios.get(config.dataoke_tophour, {
       params: {
-        appkey: 'z3slibyowj',
+        appkey: config.dataoke_key,
         page:params.page,
         v:2
       }
@@ -53,18 +54,18 @@ exports.all = async (ctx,next) => {
       }
     }
   }else if (params.api == "top_day") {
-    res = await Axios.get('http://api.taokezhushou.com/api/v1/top_day', {
+    res = await Axios.get(config.taokezhushou_topday, {
       params: {
-        app_key: 'dda0b3fd3879156d',
+        app_key: config.dataokezhushou_key,
         page:params.page,
       }
     })
   }else if (params.api == "search") {
-    res = await Axios.get('http://openapi.qingtaoke.com/search', {
+    res = await Axios.get(config.qingtao_search, {
       params: {
         s_type:'1',
         v:'1.0',
-        app_key: 'LT9hObZ3',
+        app_key: config.qingtao_key,
         page:params.page,
         sort:params.sort,
         key_word:params.searchValue,
