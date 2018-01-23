@@ -18,6 +18,11 @@ exports.all = async (ctx,next) => {
           page:params.page,
         }
       })
+      for (let i = 0; i < res.data.result.length; i++) {
+        if (!res.data.result[i].Pic.startsWith("http")) {
+          res.data.result[i].Pic = "http:"+res.data.result[i].Pic;
+        }
+      }
     }else {
       res = await Axios.get('http://api.taokezhushou.com/api/v1/search', {
         params: {
