@@ -2,7 +2,7 @@
 
 module.exports = {
 	//openid
-	openid:'https://api.weixin.qq.com/sns/jscode2session?grant_type=authorization_code',
+	openid:'https://api.weixin.qq.com/sns/jscode2session',
 	//大淘客精选
 	dataoke_jingxuan:'http://api.dataoke.com/index.php?r=Port/index&type=total&v=2',
 	//大淘客2小时榜

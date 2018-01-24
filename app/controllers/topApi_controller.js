@@ -22,3 +22,9 @@ exports.topApi = async(ctx, next) => {
         modle: temp.data.model,
     }
 }
+
+/*
+'text': '【年货节】支付宝红包，最高888元，返回短信再复制，打开支付宝领红包！',
+'url': 'https://s.click.taobao.com/RTdNZUw',
+'logo': 'https://img.alicdn.com/tfs/TB1dpkpmxrI8KJjy0FpXXb5hVXa-440-180.jpg'
+*/
