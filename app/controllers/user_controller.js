@@ -7,7 +7,6 @@ const schedule = require('node-schedule');
 let rule = new schedule.RecurrenceRule();
 rule.hour =0; rule.minute =0; rule.second =0
 var j = schedule.scheduleJob(rule, function(){
-	console.log('现在时间：',new Date());
 	userModel.update({
 		'shareStatus':'N',
 		'signStatus':'N'
