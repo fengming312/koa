@@ -22,6 +22,7 @@
     "koa-views": "^5.2.1",
     "log4js": "^0.6.38",
     "mysql": "^2.11.1",
+    "node-schedule": "^1.3.0",
     "pug": "^2.0.0-rc.1",
     "sequelize": "3.24.1"
   },
