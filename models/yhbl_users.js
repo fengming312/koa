@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     money: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.FLOAT(11),
       allowNull: true
     },
     shareStatus: {

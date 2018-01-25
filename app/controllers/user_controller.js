@@ -33,11 +33,13 @@ exports.getUser = async (ctx, next) => {
 exports.share = async (ctx, next) => {
 	let params = ctx.request.body;
 	let num = 50;
-	let pointsNew = Number(params.points) + num
+	let pointsNew = Number(params.points) + num;
+  let money = (pointsNew * 0.01).toFixed(2).toString()
 	try {
 		await userModel.update({
 			'points':pointsNew,
-			'shareStatus':params.shareStatus
+			'shareStatus':params.shareStatus,
+      'money':money
 		},{
 			'where': {
 				'openid': params.openid
@@ -51,7 +53,8 @@ exports.share = async (ctx, next) => {
 			'msg':'转发成功！',
 			'pointsNum':num,
 			'points':res.points,
-			'shareStatus':res.shareStatus
+			'shareStatus':res.shareStatus,
+      'money':res.money
 		}
 	} catch (err) {
 		ctx.response.body = err
@@ -61,11 +64,13 @@ exports.share = async (ctx, next) => {
 exports.sign = async (ctx, next) => {
 	let params = ctx.request.body;
 	let num = 10;
-	let pointsNew = Number(params.points) + num
+	let pointsNew = Number(params.points) + num;
+	let money = (pointsNew * 0.01).toFixed(2).toString()
 	try {
 		await userModel.update({
 			'points':pointsNew,
-			'signStatus':params.signStatus
+			'signStatus':params.signStatus,
+			'money':money
 		},{
 			'where': {
 				'openid': params.openid
@@ -79,7 +84,8 @@ exports.sign = async (ctx, next) => {
 			'msg':'签到成功！',
 			'pointsNum':num,
 			'points':res.points,
-			'signStatus':res.signStatus
+			'signStatus':res.signStatus,
+			'money':res.money
 		}
 	} catch (err) {
 		ctx.response.body = err
