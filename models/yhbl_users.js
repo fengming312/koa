@@ -12,6 +12,22 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true
     },
+    points: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    money: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    shareStatus: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
+    signStatus: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
     nickName: {
       type: DataTypes.STRING(255),
       allowNull: true
@@ -38,6 +54,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     language: {
       type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
       allowNull: true
     }
   }, {
