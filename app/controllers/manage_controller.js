@@ -1,5 +1,6 @@
 const sequelize = require('./sequelize');
 const checkModel = sequelize.import('../../models/yhbl_check')
+const activityModel = sequelize.import('../../models/yhbl_activity')
 
 
 //审核
@@ -30,6 +31,7 @@ exports.postCheck = async (ctx, next) => {
 		console.log(err);
 	}
 }
+
 exports.getCheck = async (ctx, next) => {
 	let res;
 	let params = ctx.request.body;
@@ -41,6 +43,38 @@ exports.getCheck = async (ctx, next) => {
 		ctx.response.body = {
 			'msg':'获取审核状态成功！',
 			'tagShow':res.tagShow
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.updateActivityInfo = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	console.log(params);
+	try {
+		res = await activityModel.update(params,{
+			'where': {}
+		});
+		ctx.response.body = {
+			'msg':'活动信息提交成功！',
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.getActivityInfo = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	try {
+		res = await activityModel.findOne({
+			'where': {}
+		});
+		ctx.response.body = {
+			'msg':'活动信息获取成功！',
+			'datas':res
 		}
 	} catch (err) {
 		console.log(err);
