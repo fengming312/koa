@@ -96,7 +96,7 @@ exports.getOpenid = async (ctx, next) => {
 	let res;
 	let params = ctx.request.body;
 	try {
-		res = await Axios.get('https://api.weixin.qq.com/sns/jscode2session?appid=wx21486179476d27c9&secret=c04de458bdc557c4df740b5c1695c599&js_code=' + params.js_code + '&grant_type=authorization_code', {
+		res = await Axios.get('https://api.weixin.qq.com/sns/jscode2session?appid=wxc1c3cca409f1c515&secret=93c64e90f34057f4365c4880b6b007d2&js_code=' + params.js_code + '&grant_type=authorization_code', {
 			params: {}
 		})
 		//如果没有这个openid就创建如果有就拉取积分和余额

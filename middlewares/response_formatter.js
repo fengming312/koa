@@ -35,8 +35,8 @@ var response_formatter = (ctx) => {
 				code: 0,
 				message: 'success',
 				data: ctx.body,
-				 tagShow:'2',
-				 buyText:""
+				tagShow: '2',
+				buyText: ""
 			}
 		}
 	} else {
