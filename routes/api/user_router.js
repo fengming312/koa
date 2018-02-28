@@ -5,5 +5,7 @@ router.get('/getUser', user_controller.getUser);
 router.post('/share', user_controller.share);
 router.post('/getOpenid', user_controller.getOpenid);
 router.post('/sign', user_controller.sign);
+router.post('/tixian', user_controller.tixian);
+router.post('/getTixianInfo', user_controller.getTixianInfo);
 
 module.exports = router;

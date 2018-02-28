@@ -1,5 +1,6 @@
 const sequelize = require('./sequelize');
 const checkModel = sequelize.import('../../models/yhbl_check')
+const userModel = sequelize.import('../../models/yhbl_users')
 const activityModel = sequelize.import('../../models/yhbl_activity')
 
 
@@ -81,5 +82,18 @@ exports.getActivityInfo = async (ctx, next) => {
 	}
 }
 
-
+//获取用户列表
+exports.getUserList = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	try {
+		res = await userModel.findAll();
+		ctx.response.body = {
+			'msg':'人员列表获取成功！',
+			'datas':res
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
 

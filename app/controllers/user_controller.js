@@ -2,6 +2,7 @@ const URL = require('../../config/url.config');
 const Axios = require('axios');
 const sequelize = require('./sequelize');
 const userModel = sequelize.import('../../models/yhbl_users')
+const tixianModel = sequelize.import('../../models/yhbl_tixian')
 const schedule = require('node-schedule');
 //定时初始化签到状态
 let rule = new schedule.RecurrenceRule();
@@ -29,6 +30,7 @@ exports.getUser = async (ctx, next) => {
 		console.log(err);
 	}
 }
+
 //转发加积分
 exports.share = async (ctx, next) => {
 	let params = ctx.request.body;
@@ -130,7 +132,50 @@ exports.getOpenid = async (ctx, next) => {
 	} catch (err) {
 		ctx.response.body = "插入数据失败！"
 	}
-	
+}
+//提现
+exports.tixian = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	try {
+		//如果没有这个openid就创建如果有就拉取积分和余额
+		let tixianInfo = await tixianModel.findOne({
+			'attributes': ['status'],
+			'where': {'openid': params.openid}
+		});
+		if (!tixianInfo) {
+			await tixianModel.create({
+				'openid': params.openid,
+				'status':params.status,
+				'zhifubao':params.zhifubao,
+				'name':params.name,
+				'tel':params.tel,
+				'money':params.money,
+			});
+			tixianInfo = await tixianModel.findOne({
+				'attributes': ['status'],
+				'where': {'openid': params.openid}
+			});
+		}
+		ctx.response.body = tixianInfo
+	} catch (err) {
+		ctx.response.body = "提现数据错误！"
+	}
+}
+//查询提现信息
+exports.getTixianInfo = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	try {
+		//如果没有这个openid就创建如果有就拉取积分和余额
+		let tixianInfo = await tixianModel.findOne({
+			'where': {'openid': params.openid}
+		});
+		
+		ctx.response.body = tixianInfo
+	} catch (err) {
+		ctx.response.body = "查询提现数据错误！"
+	}
 }
 
 
