@@ -1,5 +1,5 @@
 /* jshint indent: 2 */
-//  sequelize-auto -o "./models" -d senhuorcom -h rm-bp1bmc6v6q9k1iri2.mysql.rds.aliyuncs.com -u dbsenhuorcom -p 3306 -x DB120522987senhuo -e mysql -t sh_goods
+//  sequelize-auto -o "./models" -d senhuorcom -h rm-bp1bmc6v6q9k1iri2.mysql.rds.aliyuncs.com -u dbsenhuorcom -p 3306 -x DB120522987senhuo -e mysql -t yhbl_tixian_record
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('yhbl_users', {

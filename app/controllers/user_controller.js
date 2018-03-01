@@ -3,6 +3,7 @@ const Axios = require('axios');
 const sequelize = require('./sequelize');
 const userModel = sequelize.import('../../models/yhbl_users')
 const tixianModel = sequelize.import('../../models/yhbl_tixian')
+const tixianRecordModel = sequelize.import('../../models/yhbl_tixian_record')
 const schedule = require('node-schedule');
 //定时初始化签到状态
 let rule = new schedule.RecurrenceRule();
@@ -151,6 +152,15 @@ exports.tixian = async (ctx, next) => {
 			'attributes': ['status'],
 			'where': {'openid': params.openid}
 		});
+		//增加提现记录
+		await tixianRecordModel.create({
+			'openid': params.openid,
+			'status':params.status,
+			'zhifubao':params.zhifubao,
+			'name':params.name,
+			'tel':params.tel,
+			'money':params.tixianMoney,
+		});
 		if (!tixianInfo) {
 			await tixianModel.create({
 				'openid': params.openid,
@@ -181,6 +191,7 @@ exports.tixian = async (ctx, next) => {
 		}
 		ctx.response.body = tixianInfo
 	} catch (err) {
+		console.log(err);
 		ctx.response.body = "提现数据错误！"
 	}
 }
@@ -197,6 +208,21 @@ exports.getTixianInfo = async (ctx, next) => {
 		ctx.response.body = tixianInfo
 	} catch (err) {
 		ctx.response.body = "查询提现数据错误！"
+	}
+}
+//查询提现记录信息
+exports.getTixianRecordInfo = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	try {
+		//如果没有这个openid就创建如果有就拉取积分和余额
+		let tixianInfo = await tixianRecordModel.findAll({
+			'where': {'openid': params.openid}
+		});
+		
+		ctx.response.body = tixianInfo
+	} catch (err) {
+		ctx.response.body = "查询提现记录信息错误！"
 	}
 }
 
