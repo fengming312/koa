@@ -2,6 +2,7 @@ const sequelize = require('./sequelize');
 const checkModel = sequelize.import('../../models/yhbl_check')
 const userModel = sequelize.import('../../models/yhbl_users')
 const activityModel = sequelize.import('../../models/yhbl_activity')
+const tixianModel = sequelize.import('../../models/yhbl_tixian')
 
 
 //审核
@@ -97,3 +98,36 @@ exports.getUserList = async (ctx, next) => {
 	}
 }
 
+//查询所有提现信息
+exports.getAllTixianInfo = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	try {
+		res = await tixianModel.findAll();
+		ctx.response.body = {
+			'msg':'提现列表获取成功！',
+			'datas':res
+		}
+	} catch (err) {
+		ctx.response.body = "查询提现数据错误！"
+	}
+}
+//提现审核
+exports.tixianAudit = async (ctx, next) => {
+	let res;
+	let params = ctx.request.body;
+	try {
+		res = await tixianModel.update({
+			'status':params.status
+		},{
+			'where': {'openid': params.openid}
+		});
+		ctx.response.body = {
+			'msg':'提现审核成功！',
+		}
+	} catch (err) {
+		ctx.response.body = {
+			'msg':'服务器异常！',
+		}
+	}
+}

@@ -138,6 +138,14 @@ exports.tixian = async (ctx, next) => {
 	let res;
 	let params = ctx.request.body;
 	try {
+		await userModel.update({
+			'points':(params.points-params.tixianMoney*100).toFixed(0).toString(),
+			'money':(params.money-params.tixianMoney).toFixed(2).toString()
+		},{
+			'where': {
+				'openid': params.openid
+			}
+		})
 		//如果没有这个openid就创建如果有就拉取积分和余额
 		let tixianInfo = await tixianModel.findOne({
 			'attributes': ['status'],
@@ -150,7 +158,21 @@ exports.tixian = async (ctx, next) => {
 				'zhifubao':params.zhifubao,
 				'name':params.name,
 				'tel':params.tel,
+				'money':params.tixianMoney,
+			});
+			tixianInfo = await tixianModel.findOne({
+				'attributes': ['status'],
+				'where': {'openid': params.openid}
+			});
+		}else {
+			res = await tixianModel.update({
+				'status':params.status,
+				'zhifubao':params.zhifubao,
+				'name':params.name,
+				'tel':params.tel,
 				'money':params.money,
+			},{
+				'where': {'openid': params.openid}
 			});
 			tixianInfo = await tixianModel.findOne({
 				'attributes': ['status'],
@@ -177,5 +199,6 @@ exports.getTixianInfo = async (ctx, next) => {
 		ctx.response.body = "查询提现数据错误！"
 	}
 }
+
 
 

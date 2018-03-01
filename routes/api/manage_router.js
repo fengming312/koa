@@ -6,5 +6,7 @@ router.post('/getCheck', manage_controller.getCheck);
 router.post('/updateActivityInfo', manage_controller.updateActivityInfo);
 router.post('/getActivityInfo', manage_controller.getActivityInfo);
 router.post('/getUserList', manage_controller.getUserList);
+router.post('/getAllTixianInfo', manage_controller.getAllTixianInfo);
+router.post('/tixianAudit', manage_controller.tixianAudit);
 
 module.exports = router;
