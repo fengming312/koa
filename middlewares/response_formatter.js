@@ -27,7 +27,12 @@ var response_formatter = (ctx) => {
 				message: 'success',
 				data: ctx.body,
 				tagShow: '1',
-				buyText: "复制淘口令，打开【手机淘宝APP】即可【领取优惠卷】并购买"
+				buyText: "复制淘口令，打开【手机淘宝APP】即可【领取优惠卷】并购买",
+				checkText:{
+					share:'转发',
+					sign:'签到',
+					zhifubao:'支付宝'
+				}
 			}
 		}
 		if (res.tagShow == '2') {
@@ -36,7 +41,12 @@ var response_formatter = (ctx) => {
 				message: 'success',
 				data: ctx.body,
 				tagShow: '2',
-				buyText: ""
+				buyText: "",
+				checkText:{
+					share:'',
+					sign:'',
+					zhifubao:''
+				}
 			}
 		}
 	} else {
